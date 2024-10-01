@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geoduck</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            position: relative;
+            height: 100%;
+            overflow: hidden
+        }
+        #map {
+            width: 50vw;
+            height: 50vw;
+        }
+        #imageView {
+            width: 50vw;
+            height: 50vw;
+        }
+        #answer {
+          position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+  <img id="imageView" class="imageView" alt="Description of Image">
+  <div id="map"></div>
+  <p id="answer">LOREM IPSUM</p>
+  <script src="script.js"></script>
+</body>
+</html>
