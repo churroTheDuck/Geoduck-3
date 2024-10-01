@@ -13,7 +13,7 @@
             display: flex;
             position: relative;
             height: 100%;
-            overflow: hidden
+            overflow: hidden;
         }
         #map {
             width: 50vw;
@@ -28,12 +28,23 @@
             left: 0;
             top: 0;
         }
+        #hide {
+            display: block;
+            position: absolute;
+            left: 0vw;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
   <img id="imageView" class="imageView" alt="Description of Image">
   <div id="map"></div>
   <p id="answer">LOREM IPSUM</p>
+  <div id="hide" class="hide"></div>
   <script src="script.js"></script>
 </body>
 </html>

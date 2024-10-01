@@ -1,7 +1,3 @@
-var img;
-var randomNumber;
-var map = L.map("map", {minZoom: 2}).setView([0, 0], 1);
-map.setMaxBounds([[-90, -180], [90, 180]]);
 var myIcon = L.icon({
   iconUrl: "pin.png",
   iconSize: [30, 30],
@@ -12,6 +8,15 @@ var answerLng;
 var guess;
 var guessMarker;
 var polyline;
+var img;
+var randomNumber;
+var map;
+
+let pw = prompt("Enter password to proceed");if (pw == "very secure") {
+  document.getElementById("hide").style.display = "none";
+  map = L.map("map", {minZoom: 2}).setView([0, 0], 1);
+  map.setMaxBounds([[-90, -180], [90, 180]]);
+}
 
 randomNumber = Math.floor(Math.random() * 10000) + 1;
 document.getElementById("imageView").src = "images/" + randomNumber + ".png";
