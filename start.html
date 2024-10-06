@@ -4,29 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geoduck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
             display: flex;
-            position: relative;
-            height: 100%;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
             overflow: hidden;
         }
-        #hide {
-            display: block;
+        #bg {
+            width: 100%;
+            object-fit: contain;
+        }
+        #logo, #formField {
             position: absolute;
-            left: 0vw;
-            top: 0;
+            z-index: 2;
+        }
+        #logo {
+            width: 50%;
+            margin: 20px;
+            top: 10%;
+        }
+        #formField {
+            bottom: 10%;
+            width: 100%;
+            text-align: center;
+        }
+        input {
+            display: block;
+            width: 50vw;
+            margin: 20px auto;
+            padding: 20px;
+            border: none;
+            color: white;
+            background-color: rgb(28, 28, 28);
+            border-radius: 20px;
+            font-size: 30px;
+            font-family: "Inria Sans", sans-serif;
+        }
+        video {
+            position: absolute;
             width: 100vw;
             height: 100vh;
-            background-color: #000000;
-            z-index: 10;
+            object-fit: cover;
+            z-index: 1;
+        }
+        :focus {
+            outline: none !important;
         }
     </style>
 </head>
 <body>
-  <div id="hide" class="hide"></div>
-  <script src="script.js"></script>
+    <!--<video autoplay muted loop>
+        <source src="0.mp4" type="video/mp4">
+    </video>-->
+    <audio autoplay loop id="audioPlayer">
+        <source src="start.wav" type="audio/wav">
+      </audio>
+    <img id="logo" src="logo.png">
+    <form id="formField">
+        <input type="text" id="inputField" autocomplete="off" placeholder="Type password here">
+    </form>
+    <script src="start.js"></script>
 </body>
 </html>

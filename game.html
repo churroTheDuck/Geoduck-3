@@ -20,20 +20,36 @@
         }
         #imageView {
             display: block;
-            width: 50vw;
-            height: 50vw;
+            width: 100vw;
+            height: 100vh;
             z-index: 0;
+        }
+        #hehe {
+            backdrop-filter: blur(10px);
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100px;
         }
         #map {
             display: block;
-            width: 50vw;
-            height: 50vw;
-            z-index: 0;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 300px;
+            height: 200px;
+            z-index: 1;
+        }
+        #map:hover {
+            width: 600px;
+            height: 400px;
         }
         #score {
             display: block;
             color: white;
-            padding-left: 10px;
+            padding-left: 30px;
             font-family: "Inria Sans", sans-serif;
             font-size: 30px;
             z-index: 11;
@@ -41,7 +57,7 @@
         #distance {
             display: block;
             color: white;
-            padding-left: 10px;
+            padding-left: 30px;
             font-family: "Inria Sans", sans-serif;
             font-size: 30px;
             z-index: 11;
@@ -51,17 +67,18 @@
             width: 50vw;
             height: 50vw;
             background-color: #000000;
-            z-index: 11;
+            z-index: 10;
         }
     </style>
 </head>
 <body>
-  <img id="imageView" class="imageView" alt="Description of Image">
+  <iframe id="imageView" src=""></iframe>
+  <div id="hehe"></div>
   <div id="map"></div>
-  <div id="results" class="results">
-    <p id="score" class="score">Score</p>
-    <p id="distance" class="distance">Distance</p>
+  <div id="results">
+    <p id="score">Score</p>
+    <p id="distance">Distance</p>
   </div>
-  <script src="script.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
