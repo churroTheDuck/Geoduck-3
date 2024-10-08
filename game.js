@@ -1,5 +1,11 @@
-var myIcon = L.icon({
+var guessIcon = L.icon({
   iconUrl: "pin.png",
+  iconSize: [30, 30],
+  iconAnchor: [15, 30],
+});
+
+var answerIcon = L.icon({
+  iconUrl: "answer.png",
   iconSize: [30, 30],
   iconAnchor: [15, 30],
 });
@@ -24,21 +30,37 @@ function fetchData() {
       randomNumber = Math.floor(Math.random() * rows.length);
       answerLat = parseFloat(rows[randomNumber][2]);
       answerLng = parseFloat(rows[randomNumber][3]);
-      document.getElementById("imageView").src = "https://www.google.com/maps/embed?pb=!4v1620280487393!6m8!1m7!1sv1x3-QY98-pdFShVQ1UmhQ!2m2" + "!1d" + answerLat + "!2d" + answerLng + "!3f0!4f0!5f1.0";
+      document.getElementById("imageView").src = "https://www.google.com/maps/embed?pb=!4v1620280487393!6m8!1m7!1sv1x3-QY98-pdFShVQ1UmhQ!2m2" + "!1d" + answerLat + "!2d" + answerLng + "!3f0!4f0!5f0.5";
     })
     .catch(error => console.error('Error reading CSV:', error));
 }
 
 fetchData();
 
+window.onload = function() {
+  if (sessionStorage.getItem("accessGranted") !== "true") {
+      window.location.href = "start.html";
+  } else {
+      sessionStorage.removeItem("accessGranted");
+  }
+};
+
+window.onresize = function() {
+  if ((window.outerHeight - window.innerHeight) > 100) {
+    window.location.href = "game.html";
+  }
+}
+
 document.getElementById("map").style.cursor = "crosshair";
 
 document.addEventListener("keypress", (event) => {
   if ((event.key === "Enter" || event.key === " ") && guessMarker) {
+    document.getElementById("map").style.width = "50vw";
+    document.getElementById("map").style.height = "50vw";
     guessed = true;
     document.getElementById("imageView").style.display = "none";
     document.getElementById("results").style.display = "block";
-    L.marker([answerLat, answerLng], { icon: myIcon }).addTo(map);
+    L.marker([answerLat, answerLng], { icon: answerIcon }).addTo(map);
     
     if (polyline) {
       polyline.setLatLngs([guessMarker.getLatLng(), [answerLat, answerLng]]);
@@ -48,14 +70,14 @@ document.addEventListener("keypress", (event) => {
     
     map.fitBounds(L.latLngBounds(guessMarker.getLatLng(), [answerLat, answerLng]), { padding: [100, 100] });
     
-    document.getElementById("score").innerHTML = "Score: " + Math.round(5000 / (1 + (Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) / 2000) ** 2));
+    document.getElementById("score").innerHTML = "Score: " + Math.round(5000 / (1 + (Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) / 2000) ** 2)) + " / 5000";
     document.getElementById("distance").innerHTML = "Distance: " + Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) + " km";
   }
 });
 
 document.addEventListener("click", () => {
   if (guessed == true) {
-    window.location = "game.html";
+    window.location.href = "game.html";
   }
 });
 
@@ -65,7 +87,7 @@ function onMapClick(e) {
     if (guessMarker) {
       guessMarker.setLatLng(guess);
     } else {
-      guessMarker = L.marker(guess, { icon: myIcon }).addTo(map);
+      guessMarker = L.marker(guess, { icon: guessIcon }).addTo(map);
     }
   }
 }

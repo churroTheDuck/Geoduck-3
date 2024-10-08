@@ -3,7 +3,8 @@ var yay;
 function password() {
     sha256(document.getElementById("inputField").value).then((hash)=>{
     if (hash == "16aba5393ad72c0041f5600ad3c2c52ec437a2f0c7fc08fadfc3c0fe9641d7a3") {
-      window.location="game.html";
+      sessionStorage.setItem("accessGranted", "true");
+      window.location.href = "game.html";
     }})
 }
 document.getElementById("formField").addEventListener("submit", password);
