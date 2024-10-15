@@ -37,39 +37,52 @@ function fetchData() {
 
 fetchData();
 
-window.onload = function() {
+window.onload = function () {
   if (sessionStorage.getItem("accessGranted") !== "true") {
-      window.location.href = "start.html";
+    window.location.href = "start.html";
   } else {
-      sessionStorage.removeItem("accessGranted");
+    sessionStorage.removeItem("accessGranted");
   }
 };
 
-window.onresize = function() {
+window.onresize = function () {
   if ((window.outerHeight - window.innerHeight) > 100) {
     window.location.href = "game.html";
   }
 }
 
+map.on('moveend', function () {
+  map.invalidateSize();
+});
+
+map.on('zoomend', function () {
+  map.invalidateSize();
+});
+
+map.on("click", onMapClick);
+
 document.getElementById("map").style.cursor = "crosshair";
 
 document.addEventListener("keypress", (event) => {
   if ((event.key === "Enter" || event.key === " ") && guessMarker) {
-    document.getElementById("map").style.width = "50vw";
-    document.getElementById("map").style.height = "50vw";
-    guessed = true;
+    document.getElementById("map").style.width = "100vw";
+    document.getElementById("map").style.height = "100vh";
+    document.getElementById("map").style.left = "0";
+    document.getElementById("map").style.bottom = "0";
     document.getElementById("imageView").style.display = "none";
+    document.getElementById("hehe").style.display = "none";
     document.getElementById("results").style.display = "block";
+    guessed = true;
     L.marker([answerLat, answerLng], { icon: answerIcon }).addTo(map);
-    
+
     if (polyline) {
       polyline.setLatLngs([guessMarker.getLatLng(), [answerLat, answerLng]]);
     } else {
       polyline = L.polyline([guessMarker.getLatLng(), [answerLat, answerLng]], { color: "black", dashArray: "10px" }).addTo(map);
     }
-    
+
     map.fitBounds(L.latLngBounds(guessMarker.getLatLng(), [answerLat, answerLng]), { padding: [100, 100] });
-    
+
     document.getElementById("score").innerHTML = "Score: " + Math.round(5000 / (1 + (Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) / 2000) ** 2)) + " / 5000";
     document.getElementById("distance").innerHTML = "Distance: " + Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) + " km";
   }
@@ -77,9 +90,18 @@ document.addEventListener("keypress", (event) => {
 
 document.addEventListener("click", () => {
   if (guessed == true) {
+    sessionStorage.setItem("accessGranted", "true");
     window.location.href = "game.html";
   }
 });
+
+document.getElementById("map").addEventListener("mouseover", function () {
+  map.invalidateSize();
+});
+
+window.onblur = function () {
+  //window.location.href = "game.html";
+};
 
 function onMapClick(e) {
   if (guessed == false) {
@@ -91,5 +113,3 @@ function onMapClick(e) {
     }
   }
 }
-
-map.on("click", onMapClick);

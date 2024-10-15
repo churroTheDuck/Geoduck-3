@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RHNG0FEXTP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RHNG0FEXTP');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geoduck</title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -19,24 +30,30 @@
             background-color: black;
             overflow: hidden;
         }
+
         #bg {
             width: 100%;
             object-fit: contain;
         }
-        #logo, #formField {
-            position: absolute;
+
+        #logo,
+        #formField {
+            position: fixed;
             z-index: 2;
         }
+
         #logo {
             width: 50%;
             margin: 20px;
             top: 10%;
         }
+
         #formField {
             bottom: 10%;
             width: 100%;
             text-align: center;
         }
+
         input {
             display: block;
             width: 50vw;
@@ -49,29 +66,33 @@
             font-size: 30px;
             font-family: "Inria Sans", sans-serif;
         }
+
         video {
-            position: absolute;
+            position: fixed;
             width: 100vw;
             height: 100vh;
             object-fit: cover;
             z-index: 1;
         }
+
         :focus {
             outline: none !important;
         }
     </style>
 </head>
+
 <body>
     <!--<video autoplay muted loop>
         <source src="0.mp4" type="video/mp4">
     </video>-->
     <audio autoplay loop id="audioPlayer">
         <source src="start.wav" type="audio/wav">
-      </audio>
+    </audio>
     <img id="logo" src="logo.png">
     <form id="formField">
         <input type="text" id="inputField" autocomplete="off" placeholder="Type password here">
     </form>
     <script src="start.js"></script>
 </body>
+
 </html>

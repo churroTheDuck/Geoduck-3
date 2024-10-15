@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RHNG0FEXTP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RHNG0FEXTP');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geoduck</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <style>
         body {
@@ -18,34 +29,40 @@
             height: 100%;
             overflow: hidden;
         }
+
         #imageView {
             display: block;
             width: 100vw;
             height: 100vh;
             z-index: 0;
         }
+
         #hehe {
             backdrop-filter: blur(10px);
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100px;
+            z-index: 2;
         }
+
         #map {
             display: block;
-            position: absolute;
-            right: 0;
-            bottom: 0;
+            position: fixed;
+            left: 20px;
+            bottom: 20px;
             width: 300px;
             height: 200px;
-            z-index: 1;
+            z-index: 2;
         }
+
         #map:hover {
             width: 600px;
             height: 400px;
         }
+
         #score {
             display: block;
             color: white;
@@ -53,33 +70,40 @@
             font-family: "Inria Sans", sans-serif;
             font-size: 30px;
             text-align: center;
-            z-index: 11;
+            z-index: 4;
         }
+
         #distance {
             display: block;
             color: white;
             padding-left: 30px;
             font-family: "Inria Sans", sans-serif;
             font-size: 30px;
-            z-index: 11;
+            z-index: 4;
         }
+
         #results {
             display: none;
-            width: 50vw;
-            height: 50vw;
+            position: fixed;
+            bottom: 0;
+            width: 100vw;
+            height: 10vw;
             background-color: #000000;
-            z-index: 10;
+            z-index: 3;
         }
     </style>
 </head>
+
 <body>
-  <iframe id="imageView" src=""></iframe>
-  <div id="hehe"></div>
-  <div id="results">
-    <p id="score">Score</p>
-    <p id="distance">Distance</p>
-  </div>
-  <div id="map"></div>
-  <script src="game.js"></script>
+    <iframe id="imageView" src=""></iframe>
+    <div id="hehe"></div>
+    <div id="results">
+        <p id="score">Score</p>
+        <p id="distance">Distance</p>
+    </div>
+    <div id="map"></div>
+    <script src="game.js">
+    </script>
 </body>
+
 </html>
