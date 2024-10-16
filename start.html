@@ -33,7 +33,8 @@
 
         #bg {
             width: 100%;
-            object-fit: contain;
+            height: 100%;
+            z-index: 1;
         }
 
         #logo,
@@ -43,27 +44,84 @@
         }
 
         #logo {
-            width: 50%;
-            margin: 20px;
-            top: 10%;
+            width: 800px;
+            bottom: 50px;
+            left: 50px;
+            z-index: 3;
+        }
+
+        #globe {
+            position: absolute;
+            width: 80vh;
+            bottom: 0px;
+            left: 0px;
+            z-index: 2;
+        }
+
+        #lines {
+            position: absolute;
+            height: 40vh;
+            top: 10vh;
+            right: 100px;
+            z-index: 2;
+        }
+
+        #move,
+        #nomove,
+        #nmpz {
+            position: absolute;
+            height: 50px;
+            right: 200px;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            transform-origin: center;
+        }
+
+        #move {
+            top: 100px;
+        }
+
+        #nomove {
+            top: 200px;
+        }
+
+        #nmpz {
+            top: 300px;
+        }
+
+        #move:hover,
+        #nomove:hover,
+        #nmpz:hover {
+            transform: scale(1.3);
+        }
+
+        #key {
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            width: 200px;
+            text-align: center;
+            z-index: 3;
         }
 
         #formField {
-            bottom: 10%;
-            width: 100%;
+            position: absolute;
+            left: 50px;
+            top: 70px;
             text-align: center;
         }
 
         input {
-            display: block;
-            width: 50vw;
+            width: 25vw;
             margin: 20px auto;
-            padding: 20px;
-            border: none;
+            padding: 10px;
+            border-color: white;
+            border-width: 5px;
+            border-style: solid;
+            border-radius: 10px;
+            background-image: linear-gradient(rgb(42, 42, 42), rgb(27, 27, 27));
             color: white;
-            background-color: rgb(28, 28, 28);
-            border-radius: 20px;
-            font-size: 30px;
+            font-size: 20px;
             font-family: "Inria Sans", sans-serif;
         }
 
@@ -72,7 +130,19 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            z-index: 1;
+            z-index: 2;
+        }
+
+        #lock {
+            display: block;
+            backdrop-filter: blur(10px);
+            display: block;
+            position: fixed;
+            top: 0;
+            right: 50px;
+            width: 500px;
+            height: 400px;
+            z-index: 2;
         }
 
         :focus {
@@ -88,10 +158,18 @@
     <audio autoplay loop id="audioPlayer">
         <source src="start.wav" type="audio/wav">
     </audio>
-    <img id="logo" src="logo.png">
+    <img id="bg" src="background.png">
+    <img id="globe" src="globe.svg">
+    <img id="lines" src="lines.svg">
+    <img id="logo" src="logo.svg">
+    <img id="move" src="MOVE.svg">
+    <img id="nomove" src="NO MOVE.svg">
+    <img id="nmpz" src="NMPZ.svg">
+    <img id="key" src="key.svg">
     <form id="formField">
-        <input type="text" id="inputField" autocomplete="off" placeholder="Type password here">
+        <input type="text" id="inputField" autocomplete="off" placeholder="">
     </form>
+    <div id="lock"></div>
     <script src="start.js"></script>
 </body>
 
