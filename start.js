@@ -6,6 +6,7 @@ function password() {
       sessionStorage.setItem("accessGranted", "true");
       document.getElementById("inputField").style.borderColor = "green";
       document.getElementById("lock").style.display = "none";
+      document.getElementById("lockIcon").style.display = "none";
     } else {
       document.getElementById("inputField").style.borderColor = "red";
     }
@@ -17,6 +18,11 @@ document.getElementById("formField").addEventListener("submit", function (event)
   password();
 });
 document.getElementById("move").addEventListener("click", function () {
+  sessionStorage.setItem("mode", "move");
+  window.location.href = "game.html"
+});
+document.getElementById("nmpz").addEventListener("click", function () {
+  sessionStorage.setItem("mode", "nmpz");
   window.location.href = "game.html"
 });
 

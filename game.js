@@ -43,6 +43,11 @@ window.onload = function () {
   } else {
     sessionStorage.removeItem("accessGranted");
   }
+  if (sessionStorage.getItem("mode") == "move") {
+    document.getElementById("imageView").style.pointerEvents = "auto";
+  } else if (sessionStorage.getItem("mode") == "nmpz") {
+    document.getElementById("imageView").style.pointerEvents = "none";
+  }
 };
 
 window.onresize = function () {
