@@ -21,7 +21,6 @@ var map;
 
 map = L.map("map", { minZoom: 2 }).setView([0, 0], 1);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(map);
-
 function fetchData() {
   fetch("results.csv")
     .then(response => response.text())

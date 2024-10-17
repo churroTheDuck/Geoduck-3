@@ -2,7 +2,7 @@ var yay;
 
 function password() {
   sha256(document.getElementById("inputField").value).then((hash) => {
-    if (hash == "16aba5393ad72c0041f5600ad3c2c52ec437a2f0c7fc08fadfc3c0fe9641d7a3") {
+    if (hash == "5646622f206dd420a883d9ce3ddc5b11d968e4ccad1f4f48882275baa3ffba02") {
       sessionStorage.setItem("accessGranted", "true");
       document.getElementById("inputField").style.borderColor = "green";
       document.getElementById("lock").style.display = "none";
