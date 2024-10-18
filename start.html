@@ -120,7 +120,7 @@
             border-style: solid;
             border-radius: 10px;
             background-image: linear-gradient(rgb(42, 42, 42), rgb(27, 27, 27));
-            color: white;
+            color: rgb(42, 42, 42);
             font-size: 20px;
             font-family: "Inria Sans", sans-serif;
         }
@@ -147,11 +147,19 @@
 
         #lockIcon {
             display: block;
-            display: block;
             position: fixed;
             top: 150px;
             right: 250px;
             height: 100px;
+            z-index: 2;
+        }
+
+        #credits {
+            display: block;
+            position: absolute;
+            width: 300px;
+            bottom: 10vh;
+            right: 100px;
             z-index: 2;
         }
 
@@ -162,9 +170,6 @@
 </head>
 
 <body>
-    <!--<video autoplay muted loop>
-        <source src="0.mp4" type="video/mp4">
-    </video>-->
     <audio autoplay loop id="audioPlayer">
         <source src="start.mp3" type="audio/wav">
     </audio>
@@ -181,6 +186,7 @@
     </form>
     <div id="lock"></div>
     <img id="lockIcon" src="lock.svg">
+    <img id="credits" src="credits.svg">
     <script src="start.js"></script>
 </body>
 

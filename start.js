@@ -2,7 +2,7 @@ var yay;
 
 function password() {
   sha256(document.getElementById("inputField").value).then((hash) => {
-    if (hash == "5646622f206dd420a883d9ce3ddc5b11d968e4ccad1f4f48882275baa3ffba02") {
+    if (hash == "d6b1f388b74ea9b2b08aa2e94b003049a912b80f7381758327d5ef4eca435ce6") {
       sessionStorage.setItem("accessGranted", "true");
       document.getElementById("inputField").style.borderColor = "green";
       document.getElementById("lock").style.display = "none";
@@ -12,6 +12,8 @@ function password() {
     }
   })
 }
+
+console.log(sha256("2357!@#$"))
 
 document.getElementById("formField").addEventListener("submit", function (event) {
   event.preventDefault();
@@ -33,11 +35,6 @@ async function sha256(message) {
   const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   return hashHex;
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  const video = document.querySelector('video');
-  video.playbackRate = 2;
-});
 
 const audio = document.querySelector('audio');
 document.addEventListener('click', function () {
