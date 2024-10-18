@@ -1,0 +1,46 @@
+npm init -y
+npm install express socket.io
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
+const path = require('path');
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+let players = {};
+let currentLocation = { lat: 0, lng: 0 }; // Example placeholder for a location
+let currentRound = 0;
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+io.on('connection', (socket) => {
+    console.log('A player connected:', socket.id);
+
+    socket.on('join', (playerName) => {
+        players[socket.id] = playerName;
+        io.emit('playerList', players);
+    });
+
+    socket.on('makeGuess', (guess) => {
+        // Handle guess logic here
+        io.emit('newGuess', { player: players[socket.id], guess });
+    });
+
+    socket.on('disconnect', () => {
+        delete players[socket.id];
+        io.emit('playerList', players);
+    });
+
+    // Start a new round
+    socket.on('startRound', () => {
+        currentRound++;
+        // Update currentLocation with new random location here
+        io.emit('roundStarted', { currentRound, currentLocation });
+    });
+});
+
+server.listen(3000, () => {
+    console.log('Server listening on port 3000');
+});
