@@ -189,5 +189,102 @@
     <img id="credits" src="credits.svg">
     <script src="start.js"></script>
 </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoGuessr Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; /* Remove default margin */
+            padding: 10px; 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            position: relative; 
+        }
+        #players {
+            margin-top: 20px; 
+            z-index: 4;
+            position: absolute;
+        }
+        #startGameBtn {
+            display: none;
+            margin-top: 0; /* Removed unnecessary margin */
+            position: relative; /* Relative positioning */
+            z-index: 2; /* you can change if u want
+        }
+        button {
+            margin-right: 10px; /* Space between buttons */
+            position: relative; /* Relative positioning */
+            z-index: 2; 
+        }
+        h1 {
+            margin-bottom: 20px; /* Adjusted heading margin for better spacing cuz sigma */
+        }
+        .name-input-container {
+            margin-top: 10px; /* Adjusted to move it higher */
+            margin-left: auto; /* Align to the right */
+            display: flex; 
+            align-items: center; 
+            position: absolute;
+            z-index: 4;
+        }
+    </style>
+</head>
+<body>
+    <h1>GeoGuessr Clone</h1>
+    <div class="name-input-container">
+        <input id="playerName" placeholder="Enter your name" />
+        <button id="joinBtn">Join Game</button>
+        <button id="startGameBtn">Start Game</button>
+    </div>
+    
+    <div id="players"></div>
+    
+    <div>
+        <h2>Make a Guess</h2>
+        <input id="guess" placeholder="Enter your guess" />
+        <button id="guessBtn">Submit Guess</button>
+    </div>
+    
+    <div id="guesses"></div>
 
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        document.getElementById('joinBtn').onclick = () => {
+            const playerName = document.getElementById('playerName').value;
+            socket.emit('join', playerName);
+            document.getElementById('startGameBtn').style.display = 'inline'; // Show start game button
+        };
+
+        document.getElementById('startGameBtn').onclick = () => {
+            socket.emit('startGame');
+            document.getElementById('startGameBtn').style.display = 'none'; // Hide after starting the game
+        };
+
+        document.getElementById('guessBtn').onclick = () => {
+            const guess = document.getElementById('guess').value;
+            socket.emit('makeGuess', guess);
+        };
+
+        socket.on('playerList', (players) => {
+            document.getElementById('players').innerHTML = Object.values(players).join(', ');
+        });
+
+        socket.on('newGuess', ({ player, guess }) => {
+            const guessesDiv = document.getElementById('guesses');
+            guessesDiv.innerHTML += `<p>${player} guessed: ${guess}</p>`;
+        });
+
+        socket.on('roundStarted', ({ currentRound, currentLocation }) => {
+            alert(`Round ${currentRound} has started! Guess the location!`);
+            console.log('Current location:', currentLocation);
+        });
+    </script>
+</body>
 </html>
