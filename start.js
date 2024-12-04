@@ -13,8 +13,6 @@ function password() {
   })
 }
 
-console.log(sha256("2357!@#$"))
-
 document.getElementById("formField").addEventListener("submit", function (event) {
   event.preventDefault();
   password();
