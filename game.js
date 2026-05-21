@@ -22,7 +22,7 @@ var map;
 map = L.map("map", { minZoom: 2 }).setView([0, 0], 1);
 L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {}).addTo(map);
 function fetchData() {
-  fetch("results.csv")
+  fetch("bay_area.csv")
     .then(response => response.text())
     .then(data => {
       const rows = data.split("\n").map(row => row.split(","));
@@ -87,8 +87,16 @@ document.addEventListener("keypress", (event) => {
 
     map.fitBounds(L.latLngBounds(guessMarker.getLatLng(), [answerLat, answerLng]), { padding: [100, 100] });
 
-    document.getElementById("score").innerHTML = "Score: " + Math.round(5000 / (1 + (Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) / 2000) ** 2)) + " / 5000";
-    document.getElementById("distance").innerHTML = "Distance: " + Math.round(map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000) + " km";
+    const distanceKm =
+      map.distance(guessMarker.getLatLng(), [answerLat, answerLng]) / 1000;
+
+    const score = Math.round(
+      5000 / (1 + (distanceKm / 20) ** 2.5)
+    );
+
+    document.getElementById("score").innerHTML =
+      "Score: " + score + " / 5000";
+    document.getElementById("distance").innerHTML = "Distance: " + Math.round(distanceKm) + " km";
   }
 });
 
